@@ -1,4 +1,6 @@
 import pandas as pd
+import openai
+from  dotenv import load_dotenv
 
 # WhatsApp del negocio y nombre del restaurante
 whatsapp = "+57 314 468 959"

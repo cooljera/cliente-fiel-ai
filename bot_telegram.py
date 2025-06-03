@@ -1,26 +1,15 @@
 import os
-import pandas as pd
+from dotenv import load_dotenv
+from openai import OpenAI
 import joblib
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes,
     filters, ConversationHandler
 )
-from generador_copys import generar_copy
-import logging
-from dotenv import load_dotenv
-from openai import OpenAI  # Cambiado aquí
-import openpyxl
-from openpyxl.styles import Font, PatternFill
-from openpyxl.worksheet.table import Table, TableStyleInfo
 
-# Configuración de logging
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+load_dotenv()  # <-- Esto es clave, debe ir antes de usar os.getenv
 
-# Cargar variables de entorno
-load_dotenv()
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Código de prueba para verificar la conexión
