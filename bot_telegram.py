@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 import joblib
+import pandas as pd
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes,
@@ -10,6 +11,7 @@ from telegram.ext import (
 
 load_dotenv()  # <-- Esto es clave, debe ir antes de usar os.getenv
 
+print("API KEY detectada:", os.getenv('OPENAI_API_KEY'))  # solo para pruebas
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Código de prueba para verificar la conexión
@@ -310,5 +312,7 @@ app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(conv_handler)
 app.add_error_handler(error_handler)
 
+import asyncio
+asyncio.run(app.bot.delete_webhook(drop_pending_updates=True))
 print("🤖 Bot ejecutándose...")
 app.run_polling()
